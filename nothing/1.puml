@@ -1,0 +1,32 @@
+@startuml
+class Student {
+    -name: String
+    -studentId: String
+    -borrowedBooks: List<Book>
+    +borrowBook(book: Book): void
+    +returnBook(book: Book): void
+    +getBorrowedBooks(): List<Book>
+}
+
+class Book {
+    -title: String
+    -author: String
+    -isbn: String
+    -isAvailable: Boolean
+    +markAsBorrowed(): void
+    +markAsReturned(): void
+}
+
+class Librarian {
+    -name: String
+    -employeeId: String
+    +addBook(book: Book): void
+    +removeBook(book: Book): void
+    +isBookAvailable(book: Book): Boolean
+    +lendBook(student: Student, book: Book): void
+    +acceptBookReturn(student: Student, book: Book): void
+}
+
+Student "1" -- "0..*" Book : borrows >
+Librarian "1" -- "0..*" Book : manages >
+@enduml
